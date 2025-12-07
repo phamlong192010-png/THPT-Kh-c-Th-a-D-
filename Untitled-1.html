@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu Trường THPT Khúc Thừa Dụ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Thiết lập chung */
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        /* 1. Tiêu đề (Header) - Thanh màu xanh đậm */
+        header {
+            background-color: #004aad;
+            padding: 20px 0;
+            color: white;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            
+            /* Định vị cho Logo */
+            position: relative; 
+            display: flex; 
+            justify-content: center; /* Căn giữa tiêu đề văn bản */
+            align-items: center;
+        }
+
+        /* 2. Định vị Logo ở góc trên bên trái */
+        .header-logo {
+            position: absolute; 
+            left: 20px; /* Cách lề trái */
+            top: 50%; /* Bắt đầu từ giữa */
+            transform: translateY(-50%); /* Căn giữa theo chiều dọc */
+            
+            width: 60px; /* Kích thước logo */
+            height: auto;
+            border-radius: 50%; 
+            padding: 5px; 
+        }
+
+
+        /* Banner */
+        .banner {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('THPT.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            font-weight: 700;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Phần nội dung (Section) */
+        .section {
+            width: 90%; 
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            line-height: 1.6;
+        }
+
+        /* Tiêu đề phần */
+        h2 {
+            color: #d9534f;
+            border-bottom: 3px solid #f0ad4e;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            font-size: 28px;
+        }
+
+        /* Hoạt động và Logo */
+        .activities-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .activities-grid img {
+            width: calc(33.333% - 20px);
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+        }
+
+        /* *** ĐÃ SỬA LỖI: phóng to 5% khi di chuột *** */
+        .activities-grid img:hover {
+            transform: scale(1.05); 
+        }
+        
+        /* Cải thiện phần Logo */
+        .logo-display img {
+            width: 250px; 
+            margin: 0 20px;
+            aspect-ratio: unset;
+            object-fit: contain;
+        }
+
+        /* Phần liên hệ */
+        .contact-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .contact-list li::before {
+            content: '🔗';
+            position: absolute;
+            left: 0;
+            color: #004aad;
+            font-weight: bold;
+        }
+        
+        .contact-list li:nth-child(2)::before {
+            content: '📍';
+        }
+        
+        .contact-list li:nth-child(3)::before {
+            content: '🗺️';
+        }
+
+        /* Chân trang (Footer) */
+        footer {
+            margin-top: 40px;
+            background-color: #004aad;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        /* Responsive cho màn hình nhỏ hơn (điện thoại) */
+        @media (max-width: 768px) {
+            .banner {
+                height: 250px;
+                font-size: 30px;
+            }
+
+            .section {
+                width: 95%;
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .activities-grid img {
+                width: calc(50% - 15px);
+            }
+            
+            .logo-display img {
+                width: 150px;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="logo trg.png" alt="Logo Trường" class="header-logo">
+    TRƯỜNG TRUNG HỌC PHỔ THÔNG KHÚC THỪA DỤ
+</header>
+
+<div class="banner">
+    CHÀO MỪNG ĐẾN VỚI TRƯỜNG KHÚC THỪA DỤ
+</div>
+
+<div class="section">
+    <h2>🌟 Giới thiệu</h2>
+    <p>
+        Trường **THCS Khúc Thừa Dụ** được thành lập năm **1999** với sứ mệnh nuôi dưỡng và phát triển toàn diện học sinh. Chúng tôi tự hào là một môi trường giáo dục chất lượng, nơi kết hợp hài hòa giữa kiến thức học thuật vững chắc và các hoạt động ngoại khóa phong phú, giúp học sinh phát huy tối đa tiềm năng của bản thân để trở thành những công dân có ích cho xã hội.
+    </p>
+</div>
+
+<div class="section">
+    <h2>🔬 Hoạt động nổi bật: Hội thi khoa học kĩ thuật</h2>
+    <div class="activities-grid">
+        <img src="KHKT1.jpg" alt="Hoạt động Khoa học Kĩ thuật 1">
+        <img src="KHKT2.jpg" alt="Hoạt động Khoa học Kĩ thuật 2">
+        <img src="KHKT3.jpg" alt="Hoạt động Khoa học Kĩ thuật 3">
+        <img src="KHKT4.jpg" alt="Hoạt động Khoa học Kĩ thuật 4">
+    </div>
+</div>
+<div class="section">
+    <h2>📞 Liên hệ và Vị trí</h2>
+    <ul class="contact-list">
+        <li> **Kênh YouTube:** <a href="https://www.youtube.com/channel/UCbZAvis7qxQBMRv8SSTv7rQ" target="_blank">https://www.youtube.com/channel/UCbZAvis7qxQBMRv8SSTv7rQ</a></li>
+        <li> **Vị trí:** Xã Vĩnh Lại, Tỉnh Hải Phòng</li>
+        <li> **Bản đồ:** <a href="https://maps.app.goo.gl/epX6NHXcsNikfDtc6" target="_blank">Xem trên Bản đồ Google</a> (https://maps.app.goo.gl/epX6NHXcsNikfDtc6)</li>
+    </ul>
+</div>
+
+<footer>
+    © 2025 | TRƯỜNG THCS KHÚC THỪA DỤ | Nơi ươm mầm tri thức và tài năng
+</footer>
+
+</body>
+</html>
