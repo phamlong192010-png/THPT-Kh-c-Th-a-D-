@@ -1,221 +1,359 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giới thiệu Trường THPT Khúc Thừa Dụ</title>
-    
-    <style>
-        /* Thiết lập chung */
-        body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trường THPT Khúc Thừa Dụ</title>
 
-        /* 1. Tiêu đề (Header) - Thanh màu xanh đậm */
-        header {
-            background-color: #004aad;
-            padding: 20px 0;
-            color: white;
-            text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            
-            /* Định vị cho Logo */
-            position: relative; 
-            display: flex; 
-            justify-content: center; /* Căn giữa tiêu đề văn bản */
-            align-items: center;
-        }
+<style>
 
-        /* 2. Định vị Logo ở góc trên bên trái */
-        .header-logo {
-            position: absolute; 
-            left: 20px; /* Cách lề trái */
-            top: 50%; /* Bắt đầu từ giữa */
-            transform: translateY(-50%); /* Căn giữa theo chiều dọc */
-            
-            width: 60px; /* Kích thước logo */
-            height: auto;
-            border-radius: 50%; 
-            padding: 5px; 
-        }
+:root {
+    --main-blue: #004aad;
+    --dark-blue: #003b8c;
+    --danger: #d9534f;
+    --warning: #f0ad4e;
+}
 
+/* RESET */
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: #f4f7f6;
+    color: #333;
+    overflow-x: hidden;
+}
 
-        /* Banner */
-        .banner {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('THPT.jpg') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 30px;
-            font-weight: 700;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
-        }
+/* HEADER + MENU TRƯỢT */
+header {
+    background: var(--main-blue);
+    padding: 20px 0;
+    color: white;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: padding 0.3s ease, font-size 0.3s ease;
+}
 
-        /* Phần nội dung (Section) */
-        .section {
-            width: 90%; 
-            max-width: 1200px;
-            margin: 40px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            line-height: 1.6;
-        }
+header.shrink {
+    padding: 10px 0;
+    font-size: 22px;
+}
 
-        /* Tiêu đề phần */
-        h2 {
-            color: #d9534f;
-            border-bottom: 3px solid #f0ad4e;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-            font-weight: 600;
-            font-size: 28px;
-        }
+.header-logo {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    border-radius: 50%;
+}
 
-        /* Hoạt động và Logo */
-        .activities-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 20px;
-        }
+/* MENU */
+.menu-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+}
 
-        .activities-grid img {
-            width: calc(33.333% - 20px);
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            transition: transform 0.3s ease-in-out;
-            object-fit: cover;
-            aspect-ratio: 1 / 1;
-        }
+.side-menu {
+    width: 250px;
+    height: 100%;
+    background: var(--dark-blue);
+    position: fixed;
+    top: 0;
+    left: -260px;
+    padding-top: 80px;
+    transition: 0.4s ease;
+    z-index: 2000;
+}
 
-        /* *** ĐÃ SỬA LỖI: phóng to 5% khi di chuột *** */
-        .activities-grid img:hover {
-            transform: scale(1.05); 
-        }
-        
-        /* Cải thiện phần Logo */
-        .logo-display img {
-            width: 250px; 
-            margin: 0 20px;
-            aspect-ratio: unset;
-            object-fit: contain;
-        }
+.side-menu a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
 
-        /* Phần liên hệ */
-        .contact-list {
-            list-style: none;
-            padding: 0;
-        }
+.side-menu a:hover {
+    background: #002d6d;
+}
 
-        .contact-list li {
-            margin-bottom: 15px;
-            padding-left: 30px;
-            position: relative;
-        }
-        
-        .contact-list li::before {
-            content: '🔗';
-            position: absolute;
-            left: 0;
-            color: #004aad;
-            font-weight: bold;
-        }
-        
-        .contact-list li:nth-child(2)::before {
-            content: '📍';
-        }
-        
-        .contact-list li:nth-child(3)::before {
-            content: '🗺️';
-        }
+.side-menu.open {
+    left: 0;
+}
 
-        /* Chân trang (Footer) */
-        footer {
-            margin-top: 40px;
-            background-color: #004aad;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 16px;
-            font-weight: 400;
-        }
+/* BANNER + TYPING + PARALLAX */
+.banner {
+    height: 420px;
+    background: url('THPT.jpg') center/cover no-repeat;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
 
-        /* Responsive cho màn hình nhỏ hơn (điện thoại) */
-        @media (max-width: 768px) {
-            .banner {
-                height: 250px;
-                font-size: 30px;
-            }
+.banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+}
 
-            .section {
-                width: 95%;
-                margin: 20px auto;
-                padding: 15px;
-            }
+/* TYPING TEXT */
+.typing-text {
+    font-size: 34px;
+    font-weight: 700;
+    white-space: nowrap;
+    border-right: 3px solid white;
+    overflow: hidden;
+    display: inline-block;
+    margin: 0 auto;
+    width: 0;
+    animation: typing 3.5s steps(40) forwards, blink 0.7s infinite;
+    z-index: 10;
+}
 
-            .activities-grid img {
-                width: calc(50% - 15px);
-            }
-            
-            .logo-display img {
-                width: 150px;
-                margin: 10px;
-            }
-        }
-    </style>
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* SECTION */
+.section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.8s ease;
+}
+
+.show {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* GALLERY GRID */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* LIGHTBOX */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 10px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 45px;
+    color: white;
+    cursor: pointer;
+}
+
+.lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 45px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.lightbox-prev { left: 30px; }
+.lightbox-next { right: 30px; }
+
+.lightbox-prev:hover,
+.lightbox-next:hover,
+.lightbox-close:hover {
+    color: #f0ad4e;
+}
+
+/* FOOTER */
+footer {
+    background: var(--main-blue);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+</style>
 </head>
+
 <body>
 
-<header>
-    <img src="logo trg.png" alt="Logo Trường" class="header-logo">
-    TRƯỜNG TRUNG HỌC PHỔ THÔNG KHÚC THỪA DỤ
+<!-- MENU TRƯỢT -->
+<div class="side-menu" id="sideMenu">
+    <a href="#">🏫 Giới thiệu</a>
+    <a href="#">📸 Hoạt động</a>
+    <a href="#">📞 Liên hệ</a>
+    <a href="#">📍 Địa chỉ</a>
+</div>
+
+<header id="header">
+    <img src="logo trg.png" class="header-logo">
+    TRƯỜNG THPT KHÚC THỪA DỤ
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </header>
 
-<div class="banner">
-    CHÀO MỪNG ĐẾN VỚI TRƯỜNG KHÚC THỪA DỤ
+<!-- BANNER -->
+<div class="banner" id="banner">
+    <div class="typing-text">Chào mừng đến với Trường Khúc Thừa Dụ</div>
 </div>
 
+<!-- GIỚI THIỆU -->
 <div class="section">
     <h2>🌟 Giới thiệu</h2>
-    <p>
-        Trường **THCS Khúc Thừa Dụ** được thành lập năm **1999** với sứ mệnh nuôi dưỡng và phát triển toàn diện học sinh. Chúng tôi tự hào là một môi trường giáo dục chất lượng, nơi kết hợp hài hòa giữa kiến thức học thuật vững chắc và các hoạt động ngoại khóa phong phú, giúp học sinh phát huy tối đa tiềm năng của bản thân để trở thành những công dân có ích cho xã hội.
-    </p>
+    <p>Trường THPT Khúc Thừa Dụ là nơi đào tạo và phát triển toàn diện học sinh về trí tuệ, đạo đức và kỹ năng sống.</p>
 </div>
 
+<!-- GALLERY -->
 <div class="section">
-    <h2>🔬 Hoạt động nổi bật: Hội thi khoa học kĩ thuật</h2>
-    <div class="activities-grid">
-        <img src="KHKT1.jpg" alt="Hoạt động Khoa học Kĩ thuật 1">
-        <img src="KHKT2.jpg" alt="Hoạt động Khoa học Kĩ thuật 2">
-        <img src="KHKT3.jpg" alt="Hoạt động Khoa học Kĩ thuật 3">
-        <img src="KHKT4.jpg" alt="Hoạt động Khoa học Kĩ thuật 4">
+    <h2>📸 Thư viện hình ảnh</h2>
+
+    <div class="gallery">
+        <img src="KHKT1.jpg" alt="">
+        <img src="KHKT2.jpg" alt="">
+        <img src="KHKT3.jpg" alt="">
+        <img src="KHKT4.jpg" alt="">
     </div>
 </div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <span class="lightbox-prev" onclick="prevImage()">&#10094;</span>
+    <img id="lightbox-img">
+    <span class="lightbox-next" onclick="nextImage()">&#10095;</span>
+</div>
+
+<!-- LIÊN HỆ -->
 <div class="section">
     <h2>📞 Liên hệ và Vị trí</h2>
-    <ul class="contact-list">
-        <li> **Kênh YouTube:** <a href="https://www.youtube.com/channel/UCbZAvis7qxQBMRv8SSTv7rQ" target="_blank">https://www.youtube.com/channel/UCbZAvis7qxQBMRv8SSTv7rQ</a></li>
-        <li> **Vị trí:** Xã Vĩnh Lại, Tỉnh Hải Phòng</li>
-        <li> **Bản đồ:** <a href="https://maps.app.goo.gl/epX6NHXcsNikfDtc6" target="_blank">Xem trên Bản đồ Google</a> (https://maps.app.goo.gl/epX6NHXcsNikfDtc6)</li>
+    <ul>
+        <li><b>Kênh YouTube:</b> <a href="https://www.youtube.com/channel/UCbZAvis7qxQBMRv8SSTv7rQ" target="_blank">Xem tại đây</a></li>
+        <li><b>Vị trí:</b> Xã Vĩnh Lại, Tỉnh Hải Phòng</li>
+        <li><b>Bản đồ:</b> <a href="https://maps.app.goo.gl/epX6NHXcsNikfDtc6" target="_blank">Xem trên Google Maps</a></li>
     </ul>
 </div>
 
-<footer>
-    © 2025 | TRƯỜNG THCS KHÚC THỪA DỤ | Nơi ươm mầm tri thức và tài năng
-</footer>
+<footer>© 2025 | Trường THPT Khúc Thừa Dụ</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+
+/* HEADER THU NHỎ */
+const header = document.getElementById("header");
+window.addEventListener("scroll", () => {
+    header.classList.toggle("shrink", window.scrollY > 50);
+});
+
+/* SECTION FADE-IN */
+const sections = document.querySelectorAll(".section");
+function showSections() {
+    sections.forEach(sec => {
+        if (sec.getBoundingClientRect().top < window.innerHeight - 80) {
+            sec.classList.add("show");
+        }
+    });
+}
+window.addEventListener("scroll", showSections);
+window.addEventListener("load", showSections);
+
+/* MENU */
+function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("open");
+}
+
+/* PARALLAX */
+window.addEventListener("scroll", () => {
+    let offset = window.scrollY * 0.5;
+    document.getElementById("banner").style.backgroundPositionY = offset + "px";
+});
+
+/* GALLERY LIGHTBOX */
+let galleryImages = document.querySelectorAll('.gallery img');
+let lightbox = document.getElementById('lightbox');
+let lightboxImg = document.getElementById('lightbox-img');
+let currentIndex = 0;
+
+/* MỞ LIGHTBOX */
+galleryImages.forEach((img, index) => {
+    img.addEventListener('click', () => {
+        currentIndex = index;
+        lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
+    });
+});
+
+/* ĐÓNG */
+function closeLightbox() {
+    lightbox.style.display = 'none';
+}
+
+/* CHUYỂN ẢNH */
+function prevImage() {
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentIndex].src;
+}
+
+function nextImage() {
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentIndex].src;
+}
+
+/* CLICK RA NGOÀI ĐỂ THOÁT */
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+});
+</script>
 
 </body>
 </html>
-
