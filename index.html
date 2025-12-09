@@ -7,14 +7,19 @@
 
 <style>
 
+/* ================= ROOT ================= */
+
 :root {
     --main-blue: #004aad;
     --dark-blue: #003b8c;
 }
 
+/* Smooth scroll */
 html {
     scroll-behavior: smooth;
 }
+
+/* ================= BODY ================= */
 
 body {
     margin: 0;
@@ -25,6 +30,7 @@ body {
 }
 
 /* ================= HEADER ================= */
+
 header {
     background: var(--main-blue);
     padding: 20px 0;
@@ -34,6 +40,363 @@ header {
     font-weight: 700;
     position: sticky;
     top: 0;
+    z-index: 3000;
+    transition: 0.3s ease;
+}
+
+header.shrink {
+    padding: 10px 0;
+    font-size: 22px;
+}
+
+.header-logo {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55px;
+    border-radius: 50%;
+}
+
+/* ================= MENU ================= */
+
+.menu-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    z-index: 4000;
+}
+
+.side-menu {
+    width: 250px;
+    height: 100%;
+    background: var(--dark-blue);
+    position: fixed;
+    top: 0;
+    left: -260px;
+    padding-top: 80px;
+    transition: 0.4s;
+    z-index: 3500;
+}
+
+.side-menu a {
+    display: block;
+    padding: 15px 20px;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+}
+
+.side-menu a:hover {
+    background: #002d6d;
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+/* ================= BANNER ================= */
+
+.banner {
+    height: 420px;
+    background: url("THPT.jpg") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: relative;
+    text-align: center;
+}
+
+.banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    pointer-events: none; /* FIX CLICK CHẶN */
+}
+
+/* ================= TYPING TEXT ================= */
+
+.typing-text {
+    font-size: 34px;
+    font-weight: 700;
+    white-space: nowrap;
+    border-right: 3px solid white;
+    overflow: hidden;
+    display: inline-block;
+    width: 0;
+    animation: typing 4s steps(60) forwards, blink 0.7s infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 36ch; } /* fix chuẩn độ dài chữ */
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* ================= ACCORDION ================= */
+
+.accordion-btn {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto 0 auto;
+    background: var(--main-blue);
+    color: white;
+    padding: 15px 20px;
+    font-size: 22px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.accordion-btn.active {
+    background: #002d6d;
+}
+
+.accordion-content {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 20px auto;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* ================= GALLERY ================= */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 15px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* ================= LIGHTBOX ================= */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 12px;
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    font-size: 45px;
+    color: white;
+    cursor: pointer;
+}
+
+.lightbox-close { top: 20px; right: 30px; }
+.lightbox-prev { left: 30px; top: 50%; transform: translateY(-50%); }
+.lightbox-next { right: 30px; top: 50%; transform: translateY(-50%); }
+
+/* ================= FOOTER ================= */
+
+footer {
+    margin-top: 40px;
+    background: var(--main-blue);
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ================= MENU SLIDE ================= -->
+
+<div class="side-menu" id="sideMenu">
+    <a href="#gioithieu">🏫 Giới thiệu</a>
+    <a href="#thuvien">📸 Thư viện ảnh</a>
+    <a href="#lienhe">📞 Liên hệ</a>
+</div>
+
+<header id="header">
+    <img src="logo_trg.png" class="header-logo">
+    TRƯỜNG THPT KHÚC THỪA DỤ
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
+
+<!-- ================= BANNER ================= -->
+
+<div class="banner">
+    <div class="typing-text">Chào mừng đến với Trường Khúc Thừa Dụ</div>
+</div>
+
+<!-- ================= CONTENT: GIỚI THIỆU ================= -->
+
+<button type="button" class="accordion-btn" data-target="gioithieu">🌟 Giới thiệu</button>
+<div class="accordion-content" id="gioithieu">
+    <div class="section">
+        Trường THPT Khúc Thừa Dụ là môi trường giáo dục phát triển toàn diện cho học sinh.
+    </div>
+</div>
+
+<!-- ================= CONTENT: GALLERY ================= -->
+
+<button type="button" class="accordion-btn" data-target="thuvien">📸 Thư viện ảnh</button>
+<div class="accordion-content" id="thuvien">
+    <div class="section">
+        <div class="gallery">
+            <img src="KHKT1.jpg">
+            <img src="KHKT2.jpg">
+            <img src="KHKT3.jpg">
+            <img src="KHKT4.jpg">
+            <img src="THPT.jpg">
+            <img src="logo_trg.png">
+        </div>
+    </div>
+</div>
+
+<!-- LIGHTBOX -->
+
+<div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <span class="lightbox-prev" onclick="prevImage()">&#10094;</span>
+    <img id="lightbox-img">
+    <span class="lightbox-next" onclick="nextImage()">&#10095;</span>
+</div>
+
+<!-- ================= CONTENT: LIÊN HỆ ================= -->
+
+<button type="button" class="accordion-btn" data-target="lienhe">📞 Liên hệ & Vị trí</button>
+<div class="accordion-content" id="lienhe">
+    <div class="section">
+        <ul>
+            <li>YouTube: <a href="https://www.youtube.com/">Xem tại đây</a></li>
+            <li>Địa chỉ: Xã Vĩnh Lại, Hải Phòng</li>
+            <li>Bản đồ: <a href="https://maps.app.goo.gl/epX6NHXcsNikfDtc6">Xem bản đồ</a></li>
+        </ul>
+    </div>
+</div>
+
+<footer>© 2025 | Trường THPT Khúc Thừa Dụ</footer>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+
+function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("open");
+}
+
+/* HEADER SHRINK */
+window.addEventListener("scroll", () => {
+    document.getElementById("header").classList.toggle("shrink", window.scrollY > 50);
+});
+
+/* PARALLAX */
+window.addEventListener("scroll", () => {
+    document.querySelector(".banner").style.backgroundPositionY = window.scrollY * 0.5 + "px";
+});
+
+/* ACCORDION */
+const accBtns = document.querySelectorAll(".accordion-btn");
+
+accBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        accBtns.forEach(other => {
+            if (other !== btn) {
+                other.classList.remove("active");
+                other.nextElementSibling.style.maxHeight = null;
+            }
+        });
+
+        btn.classList.toggle("active");
+        let box = btn.nextElementSibling;
+
+        if (btn.classList.contains("active")) {
+            box.style.maxHeight = box.scrollHeight + "px";
+        } else {
+            box.style.maxHeight = null;
+        }
+    });
+});
+
+/* MENU CLICK → MỞ ACCORDION */
+document.querySelectorAll(".side-menu a").forEach(a => {
+    a.addEventListener("click", () => {
+        let id = a.getAttribute("href").substring(1);
+        let btn = document.querySelector(`.accordion-btn[data-target="${id}"]`);
+        if (btn && !btn.classList.contains("active")) btn.click();
+        toggleMenu();
+    });
+});
+
+/* LIGHTBOX */
+const imgs = document.querySelectorAll(".gallery img");
+const lb = document.getElementById("lightbox");
+const lbImg = document.getElementById("lightbox-img");
+let index = 0;
+
+imgs.forEach((img, i) => {
+    img.addEventListener("click", () => {
+        index = i;
+        lb.style.display = "flex";
+        lbImg.src = img.src;
+    });
+});
+
+function closeLightbox() { lb.style.display = "none"; }
+
+function prevImage() {
+    index = (index - 1 + imgs.length) % imgs.length;
+    lbImg.src = imgs[index].src;
+}
+
+function nextImage() {
+    index = (index + 1) % imgs.length;
+    lbImg.src = imgs[index].src;
+}
+
+</script>
+
+</body>
+</html>
     z-index: 3000;
     transition: 0.3s;
 }
@@ -696,4 +1059,5 @@ lightbox.addEventListener('click', (e) => {
 
 </body>
 </html>
+
 
