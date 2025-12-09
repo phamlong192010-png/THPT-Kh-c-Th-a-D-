@@ -10,11 +10,12 @@
 :root {
     --main-blue: #004aad;
     --dark-blue: #003b8c;
-    --danger: #d9534f;
-    --warning: #f0ad4e;
 }
 
-/* RESET */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -23,7 +24,7 @@ body {
     overflow-x: hidden;
 }
 
-/* HEADER + MENU TRƯỢT */
+/* ================= HEADER ================= */
 header {
     background: var(--main-blue);
     padding: 20px 0;
@@ -33,7 +34,345 @@ header {
     font-weight: 700;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 3000;
+    transition: 0.3s;
+}
+header.shrink {
+    padding: 10px 0;
+    font-size: 22px;
+}
+.header-logo {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    border-radius: 50%;
+}
+
+/* ================= MENU ================= */
+.menu-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+    z-index: 4000;
+}
+
+.side-menu {
+    width: 250px;
+    height: 100%;
+    background: var(--dark-blue);
+    position: fixed;
+    top: 0;
+    left: -260px;
+    padding-top: 80px;
+    transition: 0.4s ease;
+    z-index: 3500;
+}
+.side-menu a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+.side-menu a:hover {
+    background: #002d6d;
+}
+.side-menu.open {
+    left: 0;
+}
+
+/* ================= BANNER ================= */
+.banner {
+    height: 420px;
+    background: url('THPT.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: white;
+}
+
+.banner::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    pointer-events: none;  /* FIX CLICK */
+}
+
+/* ================= TYPING (FIXED WIDTH) ================= */
+.typing-text {
+    font-size: 34px;
+    font-weight: 700;
+    white-space: nowrap;
+    border-right: 3px solid white;
+    overflow: hidden;
+    display: inline-block;
+    width: 0;
+    animation: typing 4s steps(40) forwards, blink .7s infinite;
+    z-index: 10;
+}
+
+/* ĐÚNG 37 ký tự trong câu → KHÔNG BỊ CHẠY LỐ */
+@keyframes typing { 
+    from { width: 0; }
+    to   { width: 37ch; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* ================= ACCORDION ================= */
+.accordion-btn {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto 0 auto;
+    background: var(--main-blue);
+    color: white;
+    padding: 15px 20px;
+    font-size: 22px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+.accordion-btn:hover { background:#003b8c; }
+.accordion-btn.active { background:#002d6d; }
+
+.accordion-content {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 20px auto;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s ease;
+}
+
+/* SECTION BOX */
+.section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top:10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* ================= GALLERY ================= */
+.gallery {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.gallery img {
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* ================= LIGHTBOX ================= */
+.lightbox {
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.85);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:5000;
+}
+.lightbox img {
+    max-width:90%;
+    max-height:80%;
+    border-radius:10px;
+}
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+    position:absolute;
+    font-size:45px;
+    color:white;
+    cursor:pointer;
+}
+.lightbox-close { top:20px; right:30px; }
+.lightbox-prev { left:30px; top:50%; transform:translateY(-50%); }
+.lightbox-next { right:30px; top:50%; transform:translateY(-50%); }
+
+/* FOOTER */
+footer {
+    margin-top:40px;
+    background:var(--main-blue);
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============= MENU ============== -->
+<div class="side-menu" id="sideMenu">
+    <a href="#gioithieu">🏫 Giới thiệu</a>
+    <a href="#thuvien">📸 Thư viện ảnh</a>
+    <a href="#lienhe">📞 Liên hệ</a>
+</div>
+
+<header id="header">
+    <img src="logo_trg.png" class="header-logo">
+    TRƯỜNG THPT KHÚC THỪA DỤ
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
+
+<!-- ============= BANNER ============== -->
+<div class="banner" id="banner">
+    <div class="typing-text">Chào mừng đến với Trường Khúc Thừa Dụ</div>
+</div>
+
+<!-- ============= ACCORDION: GIỚI THIỆU ============== -->
+<button type="button" class="accordion-btn" data-target="gioithieu">🌟 Giới thiệu</button>
+<div class="accordion-content" id="gioithieu">
+    <div class="section">
+        Trường Trung học phổ thông Khúc Thừa Dụ, tọa lạc tại thị trấn Thanh Miện, huyện Thanh Miện, tỉnh Hải Dương, là một ngôi trường có lịch sử lâu đời, mang tên vị Tiết độ sứ có công đặt nền móng độc lập dân tộc. 🏛️ Kiến trúc của trường là sự kết hợp hài hòa giữa nét truyền thống và hiện đại, với khuôn viên rộng rãi, thoáng đãng, rợp bóng cây xanh và các dãy phòng học, phòng chức năng khang trang. Trường nổi tiếng với chất lượng giáo dục ổn định và nhiều thành tích cao trong các kỳ thi học sinh giỏi cấp tỉnh và thi đại học. Đội ngũ giáo viên tâm huyết cùng môi trường học tập thân thiện, toàn diện giúp học sinh không chỉ vững vàng về kiến thức mà còn phát triển về kỹ năng sống, thể chất và tinh thần, góp phần tích cực vào sự phát triển của quê hương.
+    </div>
+</div>
+
+<!-- ============= ACCORDION: GALLERY ============== -->
+<button type="button" class="accordion-btn" data-target="thuvien">📸 Thư viện hình ảnh</button>
+<div class="accordion-content" id="thuvien">
+    <div class="section">
+        <div class="gallery">
+            <img src="KHKT1.jpg">
+            <img src="KHKT2.jpg">
+            <img src="KHKT3.jpg">
+            <img src="KHKT4.jpg">
+            <img src="THPT.jpg">
+            <img src="logo_trg.png">
+        </div>
+    </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <span class="lightbox-prev" onclick="prevImage()">&#10094;</span>
+    <img id="lightbox-img">
+    <span class="lightbox-next" onclick="nextImage()">&#10095;</span>
+</div>
+
+<!-- ============= ACCORDION: LIÊN HỆ ============== -->
+<button type="button" class="accordion-btn" data-target="lienhe">📞 Liên hệ & Vị trí</button>
+<div class="accordion-content" id="lienhe">
+    <div class="section">
+        <ul>
+            <li><b>YouTube:</b> 
+                <a href="https://www.youtube.com/channel/UCbZAvis7qxQBMRv8SSTv7rQ">Xem tại đây</a>
+            </li>
+            <li><b>Địa chỉ:</b> Xã Vĩnh Lại, Hải Phòng</li>
+            <li><b>Google Maps:</b> 
+                <a href="https://maps.app.goo.gl/epX6NHXcsNikfDtc6">Xem bản đồ</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<footer>
+    © 2025 | Trường THPT Khúc Thừa Dụ
+</footer>
+
+<!-- ============= SCRIPT ============== -->
+<script>
+
+/* HEADER SHRINK */
+window.addEventListener("scroll",()=> {
+    document.getElementById("header")
+        .classList.toggle("shrink", window.scrollY > 50);
+});
+
+/* MENU */
+function toggleMenu(){
+    document.getElementById("sideMenu").classList.toggle("open");
+}
+
+/* PARALLAX */
+window.addEventListener("scroll",()=>{
+    document.getElementById("banner").style.backgroundPositionY =
+        window.scrollY * 0.5 + "px";
+});
+
+/* ACCORDION */
+const accButtons=document.querySelectorAll(".accordion-btn");
+
+accButtons.forEach(btn=>{
+    btn.addEventListener("click",()=>{
+
+        accButtons.forEach(other=>{
+            if(other!==btn){
+                other.classList.remove("active");
+                other.nextElementSibling.style.maxHeight=null;
+            }
+        });
+
+        btn.classList.toggle("active");
+        let content=btn.nextElementSibling;
+
+        if(btn.classList.contains("active")){
+            content.style.maxHeight=content.scrollHeight+"px";
+        } else {
+            content.style.maxHeight=null;
+        }
+    });
+});
+
+/* MENU CLICK → TỰ MỞ ACCORDION */
+document.querySelectorAll(".side-menu a").forEach(link=>{
+    link.addEventListener("click",()=>{
+        let id = link.getAttribute("href").substring(1);
+        let btn = document.querySelector(`.accordion-btn[data-target="${id}"]`);
+        
+        if(!btn.classList.contains("active")) btn.click();
+        
+        toggleMenu();
+    });
+});
+
+/* LIGHTBOX */
+let galleryImages=document.querySelectorAll(".gallery img");
+let lightbox=document.getElementById("lightbox");
+let lightboxImg=document.getElementById("lightbox-img");
+let currentIndex=0;
+
+galleryImages.forEach((img,index)=>{
+    img.addEventListener("click",()=>{
+        currentIndex=index;
+        lightbox.style.display="flex";
+        lightboxImg.src=img.src;
+    });
+});
+
+function closeLightbox(){ lightbox.style.display="none"; }
+function prevImage(){
+    currentIndex=(currentIndex-1+galleryImages.length)%galleryImages.length;
+    lightboxImg.src=galleryImages[currentIndex].src;
+}
+function nextImage(){
+    currentIndex=(currentIndex+1)%galleryImages.length;
+    lightboxImg.src=galleryImages[currentIndex].src;
+}
+
+</script>
+
+</body>
+</html>
     transition: padding 0.3s ease, font-size 0.3s ease;
 }
 
@@ -357,3 +696,4 @@ lightbox.addEventListener('click', (e) => {
 
 </body>
 </html>
+
