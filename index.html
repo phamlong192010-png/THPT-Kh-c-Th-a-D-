@@ -8,18 +8,14 @@
 <style>
 
 /* ================= ROOT ================= */
-
 :root {
     --main-blue: #004aad;
     --dark-blue: #003b8c;
 }
 
-/* Smooth scroll */
 html {
     scroll-behavior: smooth;
 }
-
-/* ================= BODY ================= */
 
 body {
     margin: 0;
@@ -30,7 +26,6 @@ body {
 }
 
 /* ================= HEADER ================= */
-
 header {
     background: var(--main-blue);
     padding: 20px 0;
@@ -43,7 +38,6 @@ header {
     z-index: 3000;
     transition: 0.3s ease;
 }
-
 header.shrink {
     padding: 10px 0;
     font-size: 22px;
@@ -59,15 +53,14 @@ header.shrink {
 }
 
 /* ================= MENU ================= */
-
 .menu-btn {
     position: absolute;
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 28px;
-    color: white;
     cursor: pointer;
+    color: white;
     z-index: 4000;
 }
 
@@ -79,28 +72,24 @@ header.shrink {
     top: 0;
     left: -260px;
     padding-top: 80px;
-    transition: 0.4s;
+    transition: 0.4s ease;
     z-index: 3500;
 }
-
 .side-menu a {
     display: block;
     padding: 15px 20px;
+    color: white;
     font-size: 20px;
     text-decoration: none;
-    color: white;
 }
-
 .side-menu a:hover {
     background: #002d6d;
 }
-
 .side-menu.open {
     left: 0;
 }
 
 /* ================= BANNER ================= */
-
 .banner {
     height: 420px;
     background: url("THPT.jpg") center/cover no-repeat;
@@ -110,6 +99,7 @@ header.shrink {
     color: white;
     position: relative;
     text-align: center;
+    overflow: hidden;
 }
 
 .banner::before {
@@ -117,11 +107,10 @@ header.shrink {
     position: absolute;
     inset: 0;
     background: rgba(0,0,0,0.45);
-    pointer-events: none; /* FIX CLICK CHẶN */
+    pointer-events: none;
 }
 
-/* ================= TYPING TEXT ================= */
-
+/* ================= FIX TYPING TEXT ================= */
 .typing-text {
     font-size: 34px;
     font-weight: 700;
@@ -129,21 +118,10 @@ header.shrink {
     border-right: 3px solid white;
     overflow: hidden;
     display: inline-block;
-    width: 0;
-    text-align: center;
-}
-
-@keyframes typing {
-    from { width: 0; }
-    to { width: 36ch; } /* fix chuẩn độ dài chữ */
-}
-
-@keyframes blink {
-    50% { border-color: transparent; }
+    padding: 0 10px;
 }
 
 /* ================= ACCORDION ================= */
-
 .accordion-btn {
     width: 90%;
     max-width: 1200px;
@@ -158,7 +136,6 @@ header.shrink {
     cursor: pointer;
     text-align: left;
 }
-
 .accordion-btn.active {
     background: #002d6d;
 }
@@ -181,28 +158,24 @@ header.shrink {
 }
 
 /* ================= GALLERY ================= */
-
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
     gap: 15px;
 }
-
 .gallery img {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     transition: 0.2s ease;
 }
-
 .gallery img:hover {
     transform: scale(1.05);
 }
 
 /* ================= LIGHTBOX ================= */
-
 .lightbox {
     position: fixed;
     inset: 0;
@@ -212,28 +185,22 @@ header.shrink {
     align-items: center;
     z-index: 5000;
 }
-
 .lightbox img {
     max-width: 90%;
     max-height: 80%;
     border-radius: 12px;
 }
-
-.lightbox-close,
-.lightbox-prev,
-.lightbox-next {
+.lightbox-close, .lightbox-prev, .lightbox-next {
     position: absolute;
     font-size: 45px;
     color: white;
     cursor: pointer;
 }
-
 .lightbox-close { top: 20px; right: 30px; }
 .lightbox-prev { left: 30px; top: 50%; transform: translateY(-50%); }
 .lightbox-next { right: 30px; top: 50%; transform: translateY(-50%); }
 
 /* ================= FOOTER ================= */
-
 footer {
     margin-top: 40px;
     background: var(--main-blue);
@@ -246,8 +213,7 @@ footer {
 </head>
 <body>
 
-<!-- ================= MENU SLIDE ================= -->
-
+<!-- MENU SLIDE -->
 <div class="side-menu" id="sideMenu">
     <a href="#gioithieu">🏫 Giới thiệu</a>
     <a href="#thuvien">📸 Thư viện ảnh</a>
@@ -260,24 +226,21 @@ footer {
     <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </header>
 
-<!-- ================= BANNER ================= -->
-
+<!-- BANNER -->
 <div class="banner">
-    <div class="typing-text">Chào mừng đến với Trường Khúc Thừa Dụ</div>
+    <div class="typing-text"></div>
 </div>
 
-<!-- ================= CONTENT: GIỚI THIỆU ================= -->
-
-<button type="button" class="accordion-btn" data-target="gioithieu">🌟 Giới thiệu</button>
+<!-- GIỚI THIỆU -->
+<button class="accordion-btn" data-target="gioithieu">🌟 Giới thiệu</button>
 <div class="accordion-content" id="gioithieu">
     <div class="section">
         Trường THPT Khúc Thừa Dụ là môi trường giáo dục phát triển toàn diện cho học sinh.
     </div>
 </div>
 
-<!-- ================= CONTENT: GALLERY ================= -->
-
-<button type="button" class="accordion-btn" data-target="thuvien">📸 Thư viện ảnh</button>
+<!-- THƯ VIỆN -->
+<button class="accordion-btn" data-target="thuvien">📸 Thư viện ảnh</button>
 <div class="accordion-content" id="thuvien">
     <div class="section">
         <div class="gallery">
@@ -292,17 +255,15 @@ footer {
 </div>
 
 <!-- LIGHTBOX -->
-
 <div class="lightbox" id="lightbox">
-    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-    <span class="lightbox-prev" onclick="prevImage()">&#10094;</span>
-    <img id="lightbox-img">
-    <span class="lightbox-next" onclick="nextImage()">&#10095;</span>
+    <span class="lightbox-close" onclick="closeLb()">&times;</span>
+    <span class="lightbox-prev" onclick="prevImg()">&#10094;</span>
+    <img id="lb-img">
+    <span class="lightbox-next" onclick="nextImg()">&#10095;</span>
 </div>
 
-<!-- ================= CONTENT: LIÊN HỆ ================= -->
-
-<button type="button" class="accordion-btn" data-target="lienhe">📞 Liên hệ & Vị trí</button>
+<!-- LIÊN HỆ -->
+<button class="accordion-btn" data-target="lienhe">📞 Liên hệ & Vị trí</button>
 <div class="accordion-content" id="lienhe">
     <div class="section">
         <ul>
@@ -315,10 +276,9 @@ footer {
 
 <footer>© 2025 | Trường THPT Khúc Thừa Dụ</footer>
 
-<!-- ================= SCRIPT ================= -->
-
 <script>
 
+/* MENU */
 function toggleMenu() {
     document.getElementById("sideMenu").classList.toggle("open");
 }
@@ -328,18 +288,11 @@ window.addEventListener("scroll", () => {
     document.getElementById("header").classList.toggle("shrink", window.scrollY > 50);
 });
 
-/* PARALLAX */
-window.addEventListener("scroll", () => {
-    document.querySelector(".banner").style.backgroundPositionY = window.scrollY * 0.5 + "px";
-});
-
 /* ACCORDION */
-const accBtns = document.querySelectorAll(".accordion-btn");
-
-accBtns.forEach(btn => {
+document.querySelectorAll(".accordion-btn").forEach(btn => {
     btn.addEventListener("click", () => {
 
-        accBtns.forEach(other => {
+        document.querySelectorAll(".accordion-btn").forEach(other => {
             if (other !== btn) {
                 other.classList.remove("active");
                 other.nextElementSibling.style.maxHeight = null;
@@ -347,55 +300,46 @@ accBtns.forEach(btn => {
         });
 
         btn.classList.toggle("active");
-        let box = btn.nextElementSibling;
-
+        let content = btn.nextElementSibling;
         if (btn.classList.contains("active")) {
-            box.style.maxHeight = box.scrollHeight + "px";
+            content.style.maxHeight = content.scrollHeight + "px";
         } else {
-            box.style.maxHeight = null;
+            content.style.maxHeight = null;
         }
     });
 });
 
-/* MENU CLICK → MỞ ACCORDION */
-document.querySelectorAll(".side-menu a").forEach(a => {
-    a.addEventListener("click", () => {
-        let id = a.getAttribute("href").substring(1);
-        let btn = document.querySelector(`.accordion-btn[data-target="${id}"]`);
-        if (btn && !btn.classList.contains("active")) btn.click();
-        toggleMenu();
-    });
-});
-
 /* LIGHTBOX */
-const imgs = document.querySelectorAll(".gallery img");
+const galleryImgs = document.querySelectorAll(".gallery img");
 const lb = document.getElementById("lightbox");
-const lbImg = document.getElementById("lightbox-img");
-let index = 0;
+const lbImg = document.getElementById("lb-img");
+let i = 0;
 
-imgs.forEach((img, i) => {
+galleryImgs.forEach((img, index) => {
     img.addEventListener("click", () => {
-        index = i;
         lb.style.display = "flex";
         lbImg.src = img.src;
+        i = index;
     });
 });
 
-function closeLightbox() { lb.style.display = "none"; }
+function closeLb() { lb.style.display = "none"; }
+function nextImg() { i = (i + 1) % galleryImgs.length; lbImg.src = galleryImgs[i].src; }
+function prevImg() { i = (i - 1 + galleryImgs.length) % galleryImgs.length; lbImg.src = galleryImgs[i].src; }
 
-function prevImage() {
-    index = (index - 1 + imgs.length) % imgs.length;
-    lbImg.src = imgs[index].src;
-}
+/* ================= FIXED TYPING EFFECT ================= */
+const text = "Chào mừng đến với Trường Khúc Thừa Dụ";
+const typingEl = document.querySelector(".typing-text");
+let t = 0;
 
-function nextImage() {
-    index = (index + 1) % imgs.length;
-    lbImg.src = imgs[index].src;
+function typing() {
+    typingEl.textContent = text.substring(0, t);
+    t++;
+    if (t <= text.length) setTimeout(typing, 70);
 }
+typing();
 
 </script>
 
 </body>
 </html>
-
-
